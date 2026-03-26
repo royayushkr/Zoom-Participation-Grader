@@ -1,5 +1,7 @@
 # Zoom Participation Grader
 
+> A Streamlit app that grades Zoom class participation using attendance exports, transcript speaking evidence, roster matching, and audit-ready Excel reports.
+
 Zoom Participation Grader is a single-file Streamlit app that helps instructors combine Zoom attendance data, Zoom transcript speaking evidence, and an optional class roster into a transparent grading workbook.
 
 The app is intentionally conservative:
