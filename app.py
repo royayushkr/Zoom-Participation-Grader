@@ -2136,178 +2136,759 @@ Johnny,John Smith
 # =========================
 
 
+def render_global_styles() -> None:
+    """Inject a polished visual system for the app."""
+    st.markdown(
+        """
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap');
+
+            :root {
+                --app-ink: #162326;
+                --app-muted: #5d6967;
+                --app-panel: rgba(255, 251, 245, 0.92);
+                --app-line: rgba(22, 35, 38, 0.10);
+                --app-soft: #eef3ef;
+                --app-soft-strong: #d9ebe5;
+                --app-teal: #0f766e;
+                --app-teal-dark: #0b4f4b;
+                --app-amber: #b45309;
+                --app-amber-soft: #fff4e5;
+                --app-red: #b42318;
+                --app-red-soft: #fff1ef;
+                --app-green-soft: #e8f5ef;
+                --app-shadow: 0 24px 60px rgba(16, 34, 32, 0.10);
+            }
+
+            .stApp {
+                background:
+                    radial-gradient(circle at top left, rgba(15, 118, 110, 0.10), transparent 28%),
+                    radial-gradient(circle at top right, rgba(180, 83, 9, 0.12), transparent 24%),
+                    linear-gradient(180deg, #fbf7f1 0%, #f4efe8 100%);
+                color: var(--app-ink);
+            }
+
+            .stApp, .stMarkdown, .stText, p, li, div {
+                font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
+            }
+
+            h1, h2, h3, .hero-title, .section-title {
+                font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", serif;
+                letter-spacing: -0.02em;
+            }
+
+            section[data-testid="stSidebar"] {
+                background:
+                    linear-gradient(180deg, rgba(11, 28, 30, 0.98), rgba(15, 38, 40, 0.97));
+                border-right: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            section[data-testid="stSidebar"] * {
+                color: #f3f7f6;
+            }
+
+            section[data-testid="stSidebar"] .stSlider label,
+            section[data-testid="stSidebar"] .stTextInput label,
+            section[data-testid="stSidebar"] .stSelectbox label,
+            section[data-testid="stSidebar"] .stMultiSelect label,
+            section[data-testid="stSidebar"] .stToggle label {
+                color: #f3f7f6;
+                font-weight: 500;
+            }
+
+            section[data-testid="stSidebar"] .stExpander {
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.03);
+                overflow: hidden;
+            }
+
+            section[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"],
+            section[data-testid="stSidebar"] .stTextInput input,
+            section[data-testid="stSidebar"] .stMultiSelect [data-baseweb="select"] {
+                background: rgba(255, 255, 255, 0.07);
+                border-radius: 14px;
+            }
+
+            .saas-shell {
+                background: var(--app-panel);
+                border: 1px solid var(--app-line);
+                border-radius: 28px;
+                box-shadow: var(--app-shadow);
+                padding: 1.5rem 1.5rem 1.35rem 1.5rem;
+            }
+
+            .hero-shell {
+                background:
+                    linear-gradient(145deg, rgba(17, 82, 79, 0.96), rgba(9, 53, 50, 0.96)),
+                    linear-gradient(180deg, #0f766e, #0b4f4b);
+                border: 1px solid rgba(255, 255, 255, 0.10);
+                border-radius: 32px;
+                color: #f8fbfa;
+                padding: 2rem 2rem 1.8rem 2rem;
+                box-shadow: 0 26px 70px rgba(11, 37, 36, 0.24);
+                min-height: 100%;
+            }
+
+            .hero-kicker,
+            .section-kicker,
+            .card-kicker,
+            .metric-label,
+            .pill {
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                font-size: 0.73rem;
+                font-weight: 700;
+            }
+
+            .hero-kicker {
+                color: rgba(243, 247, 246, 0.75);
+                margin-bottom: 0.85rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.3rem, 4vw, 4.2rem);
+                line-height: 1.02;
+                margin: 0 0 0.9rem 0;
+            }
+
+            .hero-copy {
+                color: rgba(243, 247, 246, 0.86);
+                font-size: 1.05rem;
+                line-height: 1.65;
+                margin-bottom: 1.1rem;
+                max-width: 48rem;
+            }
+
+            .pill-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.55rem;
+                margin-top: 1rem;
+            }
+
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                padding: 0.55rem 0.85rem;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.10);
+                color: #f8fbfa;
+                border: 1px solid rgba(255, 255, 255, 0.10);
+            }
+
+            .hero-panel {
+                background: rgba(255, 252, 247, 0.92);
+                border: 1px solid rgba(22, 35, 38, 0.08);
+                border-radius: 28px;
+                padding: 1.35rem 1.35rem 1.15rem 1.35rem;
+                box-shadow: var(--app-shadow);
+                min-height: 100%;
+            }
+
+            .hero-panel h3,
+            .card-title {
+                margin: 0 0 0.6rem 0;
+                color: var(--app-ink);
+                font-size: 1.2rem;
+            }
+
+            .hero-panel p,
+            .hero-panel li,
+            .card-copy,
+            .section-copy {
+                color: var(--app-muted);
+                line-height: 1.62;
+                margin: 0;
+            }
+
+            .hero-list,
+            .sheet-list {
+                list-style: none;
+                padding: 0;
+                margin: 0.95rem 0 0 0;
+            }
+
+            .hero-list li,
+            .sheet-list li {
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                padding: 0.7rem 0;
+                border-bottom: 1px solid rgba(22, 35, 38, 0.08);
+                color: var(--app-ink);
+                font-size: 0.96rem;
+            }
+
+            .hero-list li:last-child,
+            .sheet-list li:last-child {
+                border-bottom: none;
+            }
+
+            .hero-list span:last-child,
+            .sheet-list span:last-child {
+                color: var(--app-muted);
+                text-align: right;
+            }
+
+            .section-shell {
+                margin: 0.85rem 0 1rem 0;
+            }
+
+            .section-kicker {
+                color: var(--app-teal);
+                margin-bottom: 0.35rem;
+            }
+
+            .section-title {
+                color: var(--app-ink);
+                font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+                margin: 0 0 0.35rem 0;
+            }
+
+            .section-copy {
+                max-width: 52rem;
+            }
+
+            .info-card,
+            .workflow-card,
+            .metric-card,
+            .notice-card {
+                background: var(--app-panel);
+                border: 1px solid var(--app-line);
+                border-radius: 24px;
+                padding: 1.15rem 1.15rem 1.05rem 1.15rem;
+                box-shadow: 0 20px 45px rgba(16, 34, 32, 0.08);
+                min-height: 100%;
+            }
+
+            .workflow-step {
+                display: inline-flex;
+                width: 2rem;
+                height: 2rem;
+                align-items: center;
+                justify-content: center;
+                border-radius: 999px;
+                background: rgba(15, 118, 110, 0.11);
+                color: var(--app-teal-dark);
+                font-weight: 700;
+                margin-bottom: 0.85rem;
+            }
+
+            .metric-card {
+                padding: 1rem 1rem 0.9rem 1rem;
+            }
+
+            .metric-card.metric-award {
+                background: linear-gradient(180deg, #eef8f4 0%, #e5f5ee 100%);
+            }
+
+            .metric-card.metric-warning {
+                background: linear-gradient(180deg, #fff6ec 0%, #fff1df 100%);
+            }
+
+            .metric-card.metric-review {
+                background: linear-gradient(180deg, #fff3f1 0%, #ffe7e2 100%);
+            }
+
+            .metric-card.metric-neutral {
+                background: linear-gradient(180deg, #fffdfa 0%, #f7f3ec 100%);
+            }
+
+            .metric-label {
+                color: var(--app-muted);
+                margin-bottom: 0.55rem;
+            }
+
+            .metric-value {
+                color: var(--app-ink);
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            .metric-footnote {
+                color: var(--app-muted);
+                font-size: 0.88rem;
+                margin-top: 0.55rem;
+            }
+
+            .notice-card.notice-success {
+                background: var(--app-green-soft);
+                border-color: rgba(15, 118, 110, 0.15);
+            }
+
+            .notice-card.notice-warning {
+                background: var(--app-amber-soft);
+                border-color: rgba(180, 83, 9, 0.16);
+            }
+
+            .notice-card.notice-danger {
+                background: var(--app-red-soft);
+                border-color: rgba(180, 35, 24, 0.16);
+            }
+
+            .notice-title {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--app-ink);
+                margin-bottom: 0.3rem;
+            }
+
+            .notice-copy {
+                color: var(--app-muted);
+                margin: 0;
+                line-height: 1.55;
+            }
+
+            .workspace-banner {
+                background: linear-gradient(180deg, rgba(255, 251, 245, 0.96), rgba(248, 244, 237, 0.98));
+                border: 1px solid var(--app-line);
+                border-radius: 26px;
+                padding: 1rem 1.1rem;
+                box-shadow: 0 18px 40px rgba(16, 34, 32, 0.06);
+            }
+
+            .workspace-banner strong {
+                color: var(--app-ink);
+            }
+
+            div[data-testid="stFileUploader"] {
+                background: rgba(255, 252, 247, 0.92);
+                border: 1px solid rgba(22, 35, 38, 0.10);
+                border-radius: 24px;
+                padding: 0.5rem 0.85rem 0.85rem 0.85rem;
+            }
+
+            div[data-testid="stFileUploader"] section {
+                border: 2px dashed rgba(15, 118, 110, 0.20);
+                border-radius: 18px;
+                background: rgba(15, 118, 110, 0.03);
+            }
+
+            .stDownloadButton > button,
+            .stButton > button {
+                border-radius: 16px;
+                border: 1px solid rgba(15, 118, 110, 0.18);
+                background: linear-gradient(180deg, #155d58 0%, #0f4d48 100%);
+                color: #f8fbfa;
+                font-weight: 700;
+                padding: 0.8rem 1rem;
+                box-shadow: 0 16px 35px rgba(15, 77, 72, 0.18);
+            }
+
+            .stDownloadButton > button:hover,
+            .stButton > button:hover {
+                border-color: rgba(15, 118, 110, 0.25);
+                color: #ffffff;
+            }
+
+            [data-testid="stDataFrame"],
+            [data-testid="stDataEditor"] {
+                border: 1px solid rgba(22, 35, 38, 0.10);
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 18px 40px rgba(16, 34, 32, 0.06);
+                background: rgba(255, 252, 247, 0.92);
+            }
+
+            div[data-baseweb="tab-list"] {
+                gap: 0.35rem;
+                background: rgba(255, 252, 247, 0.75);
+                border: 1px solid rgba(22, 35, 38, 0.08);
+                padding: 0.3rem;
+                border-radius: 18px;
+            }
+
+            div[data-baseweb="tab-list"] button {
+                border-radius: 14px;
+                color: var(--app-muted);
+                font-weight: 600;
+            }
+
+            div[data-baseweb="tab-list"] button[aria-selected="true"] {
+                background: rgba(15, 118, 110, 0.10);
+                color: var(--app-teal-dark);
+            }
+
+            .stAlert {
+                border-radius: 20px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_header(kicker: str, title: str, copy: str) -> None:
+    """Render a consistent section heading."""
+    st.markdown(
+        f"""
+        <div class="section-shell">
+            <div class="section-kicker">{html.escape(kicker)}</div>
+            <h2 class="section-title">{html.escape(title)}</h2>
+            <p class="section-copy">{html.escape(copy)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_metric_card(
+    column: Any,
+    label: str,
+    value: Any,
+    footnote: str = "",
+    tone: str = "neutral",
+) -> None:
+    """Render a branded KPI card."""
+    column.markdown(
+        f"""
+        <div class="metric-card metric-{html.escape(tone)}">
+            <div class="metric-label">{html.escape(label)}</div>
+            <div class="metric-value">{html.escape(str(value))}</div>
+            <div class="metric-footnote">{html.escape(footnote)}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_notice_card(title: str, copy: str, tone: str = "success") -> None:
+    """Render a styled notice banner."""
+    st.markdown(
+        f"""
+        <div class="notice-card notice-{html.escape(tone)}">
+            <div class="notice-title">{html.escape(title)}</div>
+            <p class="notice-copy">{html.escape(copy)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_sidebar_config() -> AppConfig:
     """Render scoring and policy controls in the sidebar."""
     with st.sidebar:
-        st.header("Configuration")
+        st.markdown(
+            """
+            <div class="saas-shell" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); box-shadow: none; padding: 1rem 1rem 0.95rem 1rem;">
+                <div class="card-kicker" style="color: rgba(243,247,246,0.70);">Control Tower</div>
+                <h3 style="margin: 0.2rem 0 0.45rem 0; color: #f8fbfa;">Grading policy</h3>
+                <p style="margin: 0; color: rgba(243,247,246,0.76); line-height: 1.6;">
+                    Tune participation rules, identity safety thresholds, and weighted scoring before you review decisions.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         config = AppConfig()
-        config.attendance_threshold_minutes = st.slider(
-            "Attendance threshold (minutes)",
-            min_value=1,
-            max_value=180,
-            value=DEFAULT_ATTENDANCE_THRESHOLD,
-        )
-        config.words_threshold = st.slider(
-            "Speaking threshold (total words)",
-            min_value=1,
-            max_value=500,
-            value=DEFAULT_WORD_THRESHOLD,
-        )
-        config.turns_threshold = st.slider(
-            "Speaking threshold (turns)",
-            min_value=1,
-            max_value=20,
-            value=DEFAULT_TURN_THRESHOLD,
-        )
-        config.span_threshold_enabled = st.toggle(
-            "Enable speaking span threshold",
-            value=False,
-        )
-        config.span_threshold_minutes = st.slider(
-            "Speaking span threshold (minutes)",
-            min_value=1,
-            max_value=60,
-            value=DEFAULT_SPAN_THRESHOLD,
-            disabled=not config.span_threshold_enabled,
-        )
-        config.fuzzy_threshold = st.slider(
-            "Fuzzy match threshold",
-            min_value=0.50,
-            max_value=1.00,
-            value=DEFAULT_FUZZY_THRESHOLD,
-            step=0.01,
-            format="%.2f",
-        )
-        config.safe_auto_approval_threshold = st.slider(
-            "Safe auto-approval threshold",
-            min_value=0.50,
-            max_value=1.00,
-            value=DEFAULT_SAFE_AUTO_THRESHOLD,
-            step=0.01,
-            format="%.2f",
-        )
-        config.bonus_policy_mode = st.selectbox(
-            "Bonus policy mode",
-            options=BONUS_POLICY_OPTIONS,
-            index=BONUS_POLICY_OPTIONS.index("attended and spoke"),
-        )
-        if config.bonus_policy_mode == "weighted score":
-            st.caption("Weighted score formula = attendance + words + turns")
-            config.attendance_weight = st.slider(
-                "Attendance weight",
-                min_value=0.0,
-                max_value=2.0,
-                value=float(DEFAULT_ATTENDANCE_WEIGHT),
-                step=0.05,
-            )
-            config.word_weight = st.slider(
-                "Word weight",
-                min_value=0.0,
-                max_value=2.0,
-                value=float(DEFAULT_WORD_WEIGHT),
-                step=0.05,
-            )
-            config.turn_weight = st.slider(
-                "Turn weight",
-                min_value=0.0,
-                max_value=2.0,
-                value=float(DEFAULT_TURN_WEIGHT),
-                step=0.05,
-            )
-            config.attendance_cap_minutes = st.slider(
-                "Attendance cap (minutes)",
+        with st.expander("Participation policy", expanded=True):
+            config.attendance_threshold_minutes = st.slider(
+                "Attendance threshold (minutes)",
                 min_value=1,
-                max_value=240,
-                value=DEFAULT_ATTENDANCE_CAP,
+                max_value=180,
+                value=DEFAULT_ATTENDANCE_THRESHOLD,
             )
-            config.word_cap = st.slider(
-                "Word cap",
+            config.words_threshold = st.slider(
+                "Speaking threshold (total words)",
                 min_value=1,
                 max_value=500,
-                value=DEFAULT_WORD_CAP,
+                value=DEFAULT_WORD_THRESHOLD,
             )
-            config.turn_cap = st.slider(
-                "Turn cap",
+            config.turns_threshold = st.slider(
+                "Speaking threshold (turns)",
                 min_value=1,
-                max_value=30,
-                value=DEFAULT_TURN_CAP,
+                max_value=20,
+                value=DEFAULT_TURN_THRESHOLD,
             )
-            config.weighted_threshold = st.slider(
-                "Weighted score threshold",
-                min_value=0.0,
-                max_value=3.0,
-                value=float(DEFAULT_WEIGHTED_THRESHOLD),
-                step=0.05,
+            config.span_threshold_enabled = st.toggle(
+                "Enable speaking span threshold",
+                value=False,
             )
+            config.span_threshold_minutes = st.slider(
+                "Speaking span threshold (minutes)",
+                min_value=1,
+                max_value=60,
+                value=DEFAULT_SPAN_THRESHOLD,
+                disabled=not config.span_threshold_enabled,
+            )
+            config.bonus_policy_mode = st.selectbox(
+                "Bonus policy mode",
+                options=BONUS_POLICY_OPTIONS,
+                index=BONUS_POLICY_OPTIONS.index("attended and spoke"),
+            )
+
+        with st.expander("Identity matching safety", expanded=True):
+            config.fuzzy_threshold = st.slider(
+                "Fuzzy match threshold",
+                min_value=0.50,
+                max_value=1.00,
+                value=DEFAULT_FUZZY_THRESHOLD,
+                step=0.01,
+                format="%.2f",
+            )
+            config.safe_auto_approval_threshold = st.slider(
+                "Safe auto-approval threshold",
+                min_value=0.50,
+                max_value=1.00,
+                value=DEFAULT_SAFE_AUTO_THRESHOLD,
+                step=0.01,
+                format="%.2f",
+            )
+            st.caption(
+                "Anything below the safe threshold is pushed toward manual review instead of auto-crediting."
+            )
+
+        if config.bonus_policy_mode == "weighted score":
+            with st.expander("Weighted score formula", expanded=True):
+                st.caption("Formula = attendance component + word component + turn component")
+                config.attendance_weight = st.slider(
+                    "Attendance weight",
+                    min_value=0.0,
+                    max_value=2.0,
+                    value=float(DEFAULT_ATTENDANCE_WEIGHT),
+                    step=0.05,
+                )
+                config.word_weight = st.slider(
+                    "Word weight",
+                    min_value=0.0,
+                    max_value=2.0,
+                    value=float(DEFAULT_WORD_WEIGHT),
+                    step=0.05,
+                )
+                config.turn_weight = st.slider(
+                    "Turn weight",
+                    min_value=0.0,
+                    max_value=2.0,
+                    value=float(DEFAULT_TURN_WEIGHT),
+                    step=0.05,
+                )
+                config.attendance_cap_minutes = st.slider(
+                    "Attendance cap (minutes)",
+                    min_value=1,
+                    max_value=240,
+                    value=DEFAULT_ATTENDANCE_CAP,
+                )
+                config.word_cap = st.slider(
+                    "Word cap",
+                    min_value=1,
+                    max_value=500,
+                    value=DEFAULT_WORD_CAP,
+                )
+                config.turn_cap = st.slider(
+                    "Turn cap",
+                    min_value=1,
+                    max_value=30,
+                    value=DEFAULT_TURN_CAP,
+                )
+                config.weighted_threshold = st.slider(
+                    "Weighted score threshold",
+                    min_value=0.0,
+                    max_value=3.0,
+                    value=float(DEFAULT_WEIGHTED_THRESHOLD),
+                    step=0.05,
+                )
         return config
 
 
 def render_filter_controls(config: AppConfig, meeting_options: Sequence[str]) -> AppConfig:
     """Render sidebar filters once meeting options are available."""
     with st.sidebar:
-        st.header("Filters")
-        config.combine_all_meetings = st.toggle("Combine all meetings view", value=True)
-        if not config.combine_all_meetings:
-            config.selected_meetings = tuple(
-                st.multiselect(
-                    "Per-meeting filter",
-                    options=list(meeting_options),
-                    default=list(meeting_options[:1]),
+        st.markdown(
+            """
+            <div class="saas-shell" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); box-shadow: none; padding: 0.95rem 1rem;">
+                <div class="card-kicker" style="color: rgba(243,247,246,0.70);">Review Lens</div>
+                <h3 style="margin: 0.2rem 0 0.45rem 0; color: #f8fbfa;">Decision filters</h3>
+                <p style="margin: 0; color: rgba(243,247,246,0.76); line-height: 1.6;">
+                    Narrow the workspace to the exact meeting, student, or review category you want to inspect.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        with st.expander("Workspace filters", expanded=True):
+            config.combine_all_meetings = st.toggle("Combine all meetings view", value=True)
+            if not config.combine_all_meetings:
+                config.selected_meetings = tuple(
+                    st.multiselect(
+                        "Per-meeting filter",
+                        options=list(meeting_options),
+                        default=list(meeting_options[:1]),
+                    )
                 )
-            )
-        config.search_text = st.text_input("Search student name", value="")
-        config.show_only_award = st.toggle("Show only Award", value=False)
-        config.show_only_do_not_award = st.toggle("Show only Do_Not_Award", value=False)
-        config.show_only_manual_review = st.toggle("Show only Manual_Review", value=False)
-        config.show_only_unmatched = st.toggle("Show only unmatched", value=False)
-        config.show_only_low_confidence = st.toggle("Show only low-confidence", value=False)
+            config.search_text = st.text_input("Search student name", value="")
+            config.show_only_award = st.toggle("Show only Award", value=False)
+            config.show_only_do_not_award = st.toggle("Show only Do_Not_Award", value=False)
+            config.show_only_manual_review = st.toggle("Show only Manual_Review", value=False)
+            config.show_only_unmatched = st.toggle("Show only unmatched", value=False)
+            config.show_only_low_confidence = st.toggle("Show only low-confidence", value=False)
     return config
 
 
 def render_instructions() -> None:
     """Render the app title and high-level instructions."""
-    st.title(APP_TITLE)
-    st.write(
-        "Upload Zoom transcript and participant files, optionally add a class roster and alias map, "
-        "then review the generated decisions before exporting an Excel workbook."
-    )
-    st.info(
-        "Attendance comes from Zoom participant exports. Speaking comes from transcripts. "
-        "Transcript-only evidence will never auto-award attendance credit."
-    )
+    hero_col, detail_col = st.columns([1.65, 1.0])
+    with hero_col:
+        st.markdown(
+            """
+            <div class="hero-shell">
+                <div class="hero-kicker">Evidence-first participation grading</div>
+                <div class="hero-title">Turn raw Zoom exports into audit-ready participation decisions.</div>
+                <p class="hero-copy">
+                    Upload attendance and transcript evidence, route risky identity matches into manual review,
+                    and export a structured Excel workbook that instructors can defend and reuse.
+                </p>
+                <div class="pill-row">
+                    <span class="pill">Attendance-backed</span>
+                    <span class="pill">Transcript speaking evidence</span>
+                    <span class="pill">Manual review safeguards</span>
+                    <span class="pill">Excel audit trail</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with detail_col:
+        st.markdown(
+            """
+            <div class="hero-panel">
+                <div class="card-kicker" style="color: #0f766e;">What the app expects</div>
+                <h3>Instructor upload pack</h3>
+                <p>Bring in the two core Zoom exports and optionally strengthen identity matching with a roster and alias map.</p>
+                <ul class="hero-list">
+                    <li><span>Transcript</span><span>.vtt from Zoom</span></li>
+                    <li><span>Attendance</span><span>.csv participant export</span></li>
+                    <li><span>Roster</span><span>Optional .csv or .xlsx</span></li>
+                    <li><span>Aliases</span><span>Optional nickname map</span></li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    workflow_cols = st.columns(3)
+    workflow_cards = [
+        (
+            "01",
+            "Upload evidence",
+            "Bring in transcripts, attendance, and optional roster context across one or many meetings.",
+        ),
+        (
+            "02",
+            "Review decisions",
+            "Inspect validation warnings, low-confidence matches, and any rows routed into manual review.",
+        ),
+        (
+            "03",
+            "Export workbook",
+            "Download a polished Excel package with config, raw evidence, decisions, and an audit log.",
+        ),
+    ]
+    for column, (step, title, copy) in zip(workflow_cols, workflow_cards):
+        column.markdown(
+            f"""
+            <div class="workflow-card">
+                <div class="workflow-step">{html.escape(step)}</div>
+                <h3 class="card-title">{html.escape(title)}</h3>
+                <p class="card-copy">{html.escape(copy)}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
 def render_sample_downloads() -> None:
     """Render sample file download buttons."""
-    with st.expander("Sample data generator", expanded=False):
-        st.write("Use these synthetic files to test the app quickly.")
-        sample_files = generate_sample_files()
-        sample_columns = st.columns(len(sample_files))
-        for idx, (name, data) in enumerate(sample_files.items()):
-            with sample_columns[idx]:
-                st.download_button(
-                    label=f"Download {name}",
-                    data=data,
-                    file_name=name,
-                    mime="application/octet-stream",
-                    use_container_width=True,
-                )
+    render_section_header(
+        "Sandbox pack",
+        "Try the workflow with matching sample files",
+        "Use the synthetic sample packet to preview the full upload, review, and export flow before running a live class batch.",
+    )
+    sample_files = generate_sample_files()
+    sample_columns = st.columns(len(sample_files))
+    for idx, (name, data) in enumerate(sample_files.items()):
+        file_type = Path(name).suffix.replace(".", "").upper()
+        sample_columns[idx].markdown(
+            f"""
+            <div class="info-card">
+                <div class="card-kicker" style="color: #0f766e;">{html.escape(file_type)}</div>
+                <h3 class="card-title" style="font-size: 1rem;">{html.escape(name)}</h3>
+                <p class="card-copy">Download this sample file and upload it to explore the app end to end.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        sample_columns[idx].download_button(
+            label=f"Download {name}",
+            data=data,
+            file_name=name,
+            mime="application/octet-stream",
+            use_container_width=True,
+        )
+
+
+def render_empty_workspace_state() -> None:
+    """Render a polished onboarding state before evidence is uploaded."""
+    render_section_header(
+        "Getting started",
+        "The app becomes a grading workspace as soon as core Zoom evidence is uploaded",
+        "You only need two exports from Zoom to start generating decisions: a transcript VTT and a participant CSV.",
+    )
+    columns = st.columns(3)
+    cards = [
+        (
+            "Required",
+            "Export from Zoom",
+            "Download the meeting transcript as a .vtt file and the participant report as a .csv file.",
+        ),
+        (
+            "Optional",
+            "Strengthen identity matching",
+            "Add a roster file and an alias map if students frequently use nicknames or device names.",
+        ),
+        (
+            "Output",
+            "Receive a final workbook",
+            "The app returns Award, Do_Not_Award, Manual_Review, and audit sheets in one Excel export.",
+        ),
+    ]
+    for column, (kicker, title, copy) in zip(columns, cards):
+        column.markdown(
+            f"""
+            <div class="info-card">
+                <div class="card-kicker" style="color: #0f766e;">{html.escape(kicker)}</div>
+                <h3 class="card-title">{html.escape(title)}</h3>
+                <p class="card-copy">{html.escape(copy)}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
 def render_validation_summary(issues: list[ValidationIssue]) -> None:
     """Render validation issues in a friendly summary."""
-    st.subheader("Validation summary")
+    render_section_header(
+        "Quality checks",
+        "Validation summary",
+        "The app flags malformed files, duplicates, and missing evidence before those issues can leak into grading decisions.",
+    )
     if not issues:
-        st.success("No validation issues detected.")
+        render_notice_card(
+            "No validation issues detected.",
+            "Current uploads passed the app's parsing and deduplication checks.",
+            tone="success",
+        )
         return
 
     issue_df = pd.DataFrame([issue.__dict__ for issue in issues])
     error_count = int((issue_df["level"] == "error").sum())
     warning_count = int((issue_df["level"] == "warning").sum())
-    if error_count:
-        st.error(f"{error_count} error(s) found.")
-    if warning_count:
-        st.warning(f"{warning_count} warning(s) found.")
+    stat_cols = st.columns(3)
+    render_metric_card(stat_cols[0], "Errors", error_count, "Rows or files that need correction", "review")
+    render_metric_card(stat_cols[1], "Warnings", warning_count, "Items worth checking before export", "warning")
+    render_metric_card(stat_cols[2], "Total checks", len(issue_df), "Combined validation findings", "neutral")
     st.dataframe(issue_df, use_container_width=True, hide_index=True)
 
 
@@ -2317,6 +2898,11 @@ def render_metrics(
     final_df: pd.DataFrame,
 ) -> None:
     """Render top-line KPI cards."""
+    render_section_header(
+        "Decision room",
+        "Current grading snapshot",
+        "Use these live metrics to see how much evidence has been ingested and how the current policy is shaping final decisions.",
+    )
     meeting_count = len(
         {
             value
@@ -2334,39 +2920,90 @@ def render_metrics(
     do_not_award_count = int((final_df.get("final_category", pd.Series(dtype=str)) == "Do_Not_Award").sum())
     manual_review_count = int((final_df.get("final_category", pd.Series(dtype=str)) == "Manual_Review").sum())
 
-    columns = st.columns(7)
-    columns[0].metric("Uploaded meetings", meeting_count)
-    columns[1].metric("Transcript rows", len(raw_transcript_df))
-    columns[2].metric("Attendance rows", len(raw_attendance_df))
-    columns[3].metric("Matched students", len(final_df))
-    columns[4].metric("Award", award_count)
-    columns[5].metric("Do_Not_Award", do_not_award_count)
-    columns[6].metric("Manual_Review", manual_review_count)
+    row_one = st.columns(4)
+    render_metric_card(row_one[0], "Uploaded meetings", meeting_count, "Meetings represented in current evidence", "neutral")
+    render_metric_card(row_one[1], "Transcript rows", len(raw_transcript_df), "Raw speaking cues parsed from VTT files", "neutral")
+    render_metric_card(row_one[2], "Attendance rows", len(raw_attendance_df), "Participant records parsed from CSV exports", "neutral")
+    render_metric_card(row_one[3], "Matched students", len(final_df), "Decision rows currently in the review workspace", "neutral")
+
+    row_two = st.columns(3)
+    render_metric_card(row_two[0], "Award", award_count, "Students recommended for bonus credit", "award")
+    render_metric_card(row_two[1], "Do_Not_Award", do_not_award_count, "Students below the active policy threshold", "warning")
+    render_metric_card(row_two[2], "Manual_Review", manual_review_count, "Rows that need instructor inspection", "review")
 
 
 def render_upload_area() -> tuple[list[Any], list[Any], Any, Any]:
     """Render file upload widgets."""
-    st.subheader("Upload area")
-    transcript_uploads = st.file_uploader(
-        "Upload Zoom transcript files (.vtt)",
-        type=["vtt"],
-        accept_multiple_files=True,
+    render_section_header(
+        "Evidence workspace",
+        "Upload the files for this grading batch",
+        "The app accepts multiple transcripts and participant reports at once, then merges them into one instructor review workspace.",
     )
-    attendance_uploads = st.file_uploader(
-        "Upload Zoom participant export files (.csv)",
-        type=["csv"],
-        accept_multiple_files=True,
-    )
-    roster_upload = st.file_uploader(
-        "Optional roster file (.csv or .xlsx)",
-        type=["csv", "xlsx"],
-        accept_multiple_files=False,
-    )
-    alias_upload = st.file_uploader(
-        "Optional alias mapping file (.csv)",
-        type=["csv"],
-        accept_multiple_files=False,
-    )
+    guide_cols = st.columns(4)
+    guide_cards = [
+        ("Required", "Transcript", "Upload one or more Zoom transcript files in .vtt format."),
+        ("Required", "Attendance", "Upload one or more Zoom participant exports in .csv format."),
+        ("Optional", "Roster", "Add a roster in .csv or .xlsx to improve identity confidence."),
+        ("Optional", "Aliases", "Add a nickname or device-name map in .csv format."),
+    ]
+    for column, (kicker, title, copy) in zip(guide_cols, guide_cards):
+        column.markdown(
+            f"""
+            <div class="info-card">
+                <div class="card-kicker" style="color: #0f766e;">{html.escape(kicker)}</div>
+                <h3 class="card-title" style="font-size: 1.05rem;">{html.escape(title)}</h3>
+                <p class="card-copy">{html.escape(copy)}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    upload_cols = st.columns([1.2, 1.0])
+    with upload_cols[0]:
+        st.markdown(
+            """
+            <div class="workspace-banner">
+                <strong>Core Zoom evidence</strong><br />
+                Upload the two required files from Zoom here. Attendance drives presence; transcripts drive speaking evidence.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        transcript_uploads = st.file_uploader(
+            "Upload Zoom transcript files (.vtt)",
+            type=["vtt"],
+            accept_multiple_files=True,
+            help="Export the meeting transcript from Zoom and upload one or more .vtt files.",
+        )
+        attendance_uploads = st.file_uploader(
+            "Upload Zoom participant export files (.csv)",
+            type=["csv"],
+            accept_multiple_files=True,
+            help="Upload one or more participant CSV exports from Zoom.",
+        )
+
+    with upload_cols[1]:
+        st.markdown(
+            """
+            <div class="workspace-banner">
+                <strong>Identity enrichment</strong><br />
+                These files are optional, but they make the matching layer more reliable when display names are inconsistent.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        roster_upload = st.file_uploader(
+            "Optional roster file (.csv or .xlsx)",
+            type=["csv", "xlsx"],
+            accept_multiple_files=False,
+            help="Upload your class roster to improve canonical matching.",
+        )
+        alias_upload = st.file_uploader(
+            "Optional alias mapping file (.csv)",
+            type=["csv"],
+            accept_multiple_files=False,
+            help="Upload a two-column alias file such as alias_name and canonical_name.",
+        )
     return transcript_uploads, attendance_uploads, roster_upload, alias_upload
 
 
@@ -2409,34 +3046,57 @@ def render_previews(
     final_df: pd.DataFrame,
 ) -> None:
     """Render parsed data previews."""
-    st.subheader("Parsed data previews")
+    render_section_header(
+        "Evidence ledger",
+        "Parsed data previews",
+        "Inspect the raw and processed tables before you finalize any grading decisions.",
+    )
     tabs = st.tabs(
         [
-            "Raw transcript preview",
-            "Raw attendance preview",
-            "Matched records preview",
-            "Final decision preview",
+            "Transcript",
+            "Attendance",
+            "Matches",
+            "Decisions",
         ]
     )
     with tabs[0]:
         if raw_transcript_df.empty:
-            st.info("No transcript rows available.")
+            render_notice_card(
+                "No transcript rows available.",
+                "Upload one or more VTT files to inspect parsed speaking evidence.",
+                tone="warning",
+            )
         else:
             preview = raw_transcript_df.drop(columns=["start_seconds", "end_seconds", "interval_key"], errors="ignore")
+            st.caption(f"{len(preview)} transcript row(s) parsed.")
             st.dataframe(preview.head(MAX_PREVIEW_ROWS), use_container_width=True, hide_index=True)
     with tabs[1]:
         if raw_attendance_df.empty:
-            st.info("No attendance rows available.")
+            render_notice_card(
+                "No attendance rows available.",
+                "Upload one or more participant CSV files to inspect attendance evidence.",
+                tone="warning",
+            )
         else:
+            st.caption(f"{len(raw_attendance_df)} attendance row(s) parsed.")
             st.dataframe(raw_attendance_df.head(MAX_PREVIEW_ROWS), use_container_width=True, hide_index=True)
     with tabs[2]:
         if matched_df.empty:
-            st.info("No matched evidence rows available.")
+            render_notice_card(
+                "No matched evidence rows available.",
+                "Once evidence is uploaded, the app will show its identity resolution output here.",
+                tone="warning",
+            )
         else:
+            st.caption(f"{len(matched_df)} matched evidence row(s) in view.")
             st.dataframe(matched_df.head(MAX_PREVIEW_ROWS), use_container_width=True, hide_index=True)
     with tabs[3]:
         if final_df.empty:
-            st.info("No final decision rows available.")
+            render_notice_card(
+                "No final decision rows available.",
+                "Final recommendation rows appear here after matching and policy scoring run.",
+                tone="warning",
+            )
         else:
             preview_columns = [
                 "meeting_name",
@@ -2450,15 +3110,38 @@ def render_previews(
                 "final_category",
                 "decision_reason",
             ]
+            st.caption(f"{len(final_df)} decision row(s) currently in view.")
             st.dataframe(final_df[preview_columns].head(MAX_PREVIEW_ROWS), use_container_width=True, hide_index=True)
 
 
 def render_matching_review(filtered_matched_df: pd.DataFrame) -> None:
     """Render a focused matching review table."""
-    st.subheader("Matching review section")
+    render_section_header(
+        "Identity review",
+        "Matching review section",
+        "This workspace helps you audit how attendance names and transcript speakers were matched to canonical students.",
+    )
     if filtered_matched_df.empty:
-        st.info("No matching rows available for the current filters.")
+        render_notice_card(
+            "No matching rows available for the current filters.",
+            "Clear some filters or upload evidence to inspect the identity resolution layer.",
+            tone="warning",
+        )
         return
+
+    stat_cols = st.columns(4)
+    review_count = int(filtered_matched_df.get("identity_review_flag", pd.Series(dtype=bool)).fillna(False).sum())
+    unmatched_count = int(
+        filtered_matched_df.get("match_method", pd.Series(dtype=str)).astype(str).str.contains("unmatched", case=False, na=False).sum()
+    )
+    low_confidence_count = int(
+        pd.to_numeric(filtered_matched_df.get("match_confidence", pd.Series(dtype=float)), errors="coerce").fillna(0).lt(DEFAULT_SAFE_AUTO_THRESHOLD).sum()
+    )
+    render_metric_card(stat_cols[0], "Rows in view", len(filtered_matched_df), "Evidence rows currently visible", "neutral")
+    render_metric_card(stat_cols[1], "Needs review", review_count, "Identity rows flagged for instructor attention", "review")
+    render_metric_card(stat_cols[2], "Unmatched", unmatched_count, "Rows with no safe canonical match", "warning")
+    render_metric_card(stat_cols[3], "Low confidence", low_confidence_count, "Rows below the default auto-approval threshold", "warning")
+
     review_columns = [
         "meeting_name",
         "evidence_source",
@@ -2481,10 +3164,29 @@ def render_matching_review(filtered_matched_df: pd.DataFrame) -> None:
 
 def render_final_review_editor(final_df: pd.DataFrame, config: AppConfig) -> pd.DataFrame:
     """Render the editable final review table and persist overrides."""
-    st.subheader("Final decision section")
+    render_section_header(
+        "Decision console",
+        "Final decision section",
+        "This is the instructor handoff layer. Edit the approved fields, add notes, and override the final category when needed.",
+    )
     if final_df.empty:
-        st.info("No decision rows are available yet.")
+        render_notice_card(
+            "No decision rows are available yet.",
+            "Upload evidence to generate the final instructor review table.",
+            tone="warning",
+        )
         return final_df
+
+    summary_cols = st.columns(3)
+    award_count = int((final_df["final_category"] == "Award").sum())
+    no_award_count = int((final_df["final_category"] == "Do_Not_Award").sum())
+    manual_count = int((final_df["final_category"] == "Manual_Review").sum())
+    render_metric_card(summary_cols[0], "Award in view", award_count, "Rows currently recommended for bonus credit", "award")
+    render_metric_card(summary_cols[1], "Do not award", no_award_count, "Rows currently below the active policy", "warning")
+    render_metric_card(summary_cols[2], "Manual review", manual_count, "Rows requiring instructor judgment", "review")
+    st.caption(
+        "Editable fields persist in session state during this browser session: canonical student name, attended, spoke, recommend award, manual review, notes, and reviewer override."
+    )
 
     display_columns = [
         "meeting_name",
@@ -2550,9 +3252,17 @@ def render_export_section(
     uploaded_filenames: Sequence[str],
 ) -> None:
     """Render the Excel export section."""
-    st.subheader("Excel export section")
+    render_section_header(
+        "Delivery",
+        "Excel export section",
+        "When the review workspace looks right, export the entire evidence trail and final decisions as one workbook.",
+    )
     if final_df.empty and raw_transcript_df.empty and raw_attendance_df.empty:
-        st.info("Upload data first to enable export.")
+        render_notice_card(
+            "Upload data first to enable export.",
+            "Once transcript or attendance evidence is available, the Excel workbook download will appear here.",
+            tone="warning",
+        )
         return
 
     workbook_bytes = build_excel_workbook(
@@ -2567,13 +3277,43 @@ def render_export_section(
         uploaded_filenames=uploaded_filenames,
     )
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    st.download_button(
-        "Download Excel workbook",
-        data=workbook_bytes,
-        file_name=f"zoom_participation_grader_{timestamp}.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        use_container_width=True,
-    )
+    export_cols = st.columns([1.15, 0.85])
+    with export_cols[0]:
+        st.markdown(
+            """
+            <div class="info-card">
+                <div class="card-kicker" style="color: #0f766e;">Workbook contents</div>
+                <h3 class="card-title">Everything needed for audit and grading</h3>
+                <p class="card-copy">The export includes raw evidence, aggregated tables, decision sheets, and a timestamped audit log.</p>
+                <ul class="sheet-list">
+                    <li><span>Config</span><span>Policy settings and export timestamp</span></li>
+                    <li><span>Raw evidence</span><span>Transcript and attendance imports</span></li>
+                    <li><span>Aggregations</span><span>Speaker and attendance rollups</span></li>
+                    <li><span>Decisions</span><span>Award, Do_Not_Award, Manual_Review</span></li>
+                    <li><span>Audit log</span><span>Warnings, unmatched rows, low-confidence notes</span></li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with export_cols[1]:
+        st.markdown(
+            f"""
+            <div class="hero-panel" style="background: linear-gradient(180deg, rgba(255,252,247,0.98), rgba(249,244,236,0.98));">
+                <div class="card-kicker" style="color: #0f766e;">Ready to ship</div>
+                <h3>Export the grading workbook</h3>
+                <p>{html.escape(str(len(final_df)))} decision row(s) and {html.escape(str(len(uploaded_filenames)))} uploaded file reference(s) will be bundled into one download.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.download_button(
+            "Download Excel workbook",
+            data=workbook_bytes,
+            file_name=f"zoom_participation_grader_{timestamp}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            use_container_width=True,
+        )
 
 
 # =========================
@@ -2583,11 +3323,20 @@ def render_export_section(
 
 def main() -> None:
     """Run the Streamlit app."""
-    st.set_page_config(page_title=APP_TITLE, layout="wide")
-    render_instructions()
+    st.set_page_config(
+        page_title=APP_TITLE,
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+    render_global_styles()
     config = render_sidebar_config()
+    render_instructions()
     render_sample_downloads()
     transcript_uploads, attendance_uploads, roster_upload, alias_upload = render_upload_area()
+
+    if not transcript_uploads and not attendance_uploads:
+        render_empty_workspace_state()
+        return
 
     transcript_files, transcript_upload_issues = uploaded_to_memory(transcript_uploads or [], "transcript")
     attendance_files, attendance_upload_issues = uploaded_to_memory(attendance_uploads or [], "attendance")
@@ -2665,9 +3414,17 @@ def main() -> None:
             )
 
     if raw_transcript_df.empty:
-        st.warning("No transcript uploaded. Speaking evidence will be unavailable.")
+        render_notice_card(
+            "No transcript uploaded.",
+            "Speaking evidence will be unavailable until one or more VTT transcript files are added.",
+            tone="warning",
+        )
     if raw_attendance_df.empty:
-        st.warning("No attendance uploaded. Transcript-only rows will remain manual review and cannot auto-award.")
+        render_notice_card(
+            "No attendance uploaded.",
+            "Transcript-only rows will remain manual review and cannot auto-award until a participant CSV is uploaded.",
+            tone="warning",
+        )
 
     global_candidates, meeting_candidates = build_candidates(roster_df, attendance_agg_df)
     alias_lookup = build_alias_lookup(alias_df)
