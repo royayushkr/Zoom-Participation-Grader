@@ -10,6 +10,7 @@ Minimal package requirements:
 
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import html
@@ -2158,8 +2159,8 @@ def render_global_styles() -> None:
                 --zoom-primary: #2d8cff;
                 --zoom-primary-strong: #0b5cff;
                 --zoom-cyan: #4cc9ff;
-                --zoom-success: #23c16b;
-                --zoom-success-soft: rgba(35, 193, 107, 0.13);
+                --zoom-success: #4da6ff;
+                --zoom-success-soft: rgba(77, 166, 255, 0.14);
                 --zoom-warning: #f59e0b;
                 --zoom-warning-soft: rgba(245, 158, 11, 0.14);
                 --zoom-danger: #f45d6c;
@@ -2185,12 +2186,18 @@ def render_global_styles() -> None:
 
             .main .block-container {
                 max-width: 1280px;
-                padding-top: 2rem;
-                padding-bottom: 5.25rem;
+                padding-top: 2.25rem;
+                padding-bottom: 5.75rem;
             }
 
             .stApp, .stMarkdown, .stText, p, li, div, span, label {
                 font-family: "Manrope", "Avenir Next", "Trebuchet MS", sans-serif;
+            }
+
+            input,
+            textarea,
+            select {
+                accent-color: var(--zoom-primary) !important;
             }
 
             h1, h2, h3, h4, .hero-title, .section-title, .card-title {
@@ -2199,6 +2206,7 @@ def render_global_styles() -> None:
             }
 
             section[data-testid="stSidebar"] {
+                --primary-color: var(--zoom-primary);
                 background:
                     linear-gradient(180deg, rgba(7, 13, 29, 0.98), rgba(11, 18, 37, 0.99));
                 border-right: 1px solid rgba(118, 142, 209, 0.14);
@@ -2222,6 +2230,28 @@ def render_global_styles() -> None:
                 border-radius: 20px;
                 background: rgba(255, 255, 255, 0.02);
                 overflow: hidden;
+            }
+
+            .sidebar-panel {
+                background: rgba(15, 22, 45, 0.82) !important;
+                border-color: rgba(118, 142, 209, 0.14) !important;
+                box-shadow: none !important;
+                padding: 1rem 1rem 0.95rem 1rem !important;
+            }
+
+            .sidebar-panel .card-kicker {
+                color: rgba(220, 233, 255, 0.72) !important;
+            }
+
+            .sidebar-panel h3 {
+                margin: 0.2rem 0 0.45rem 0 !important;
+                color: var(--zoom-text-strong) !important;
+            }
+
+            .sidebar-panel p {
+                margin: 0 !important;
+                color: rgba(220, 233, 255, 0.82) !important;
+                line-height: 1.6 !important;
             }
 
             .saas-shell {
@@ -2298,6 +2328,7 @@ def render_global_styles() -> None:
             .metric-card,
             .notice-card,
             .guide-card,
+            .sample-card,
             .workspace-banner,
             .status-strip {
                 background: var(--zoom-panel);
@@ -2362,7 +2393,7 @@ def render_global_styles() -> None:
             }
 
             .section-shell {
-                margin: 0.2rem 0 1.5rem 0;
+                margin: 0.25rem 0 1.85rem 0;
             }
 
             .section-kicker {
@@ -2385,13 +2416,26 @@ def render_global_styles() -> None:
             .info-card,
             .workflow-card,
             .metric-card,
-            .notice-card {
+            .notice-card,
+            .sample-card {
                 padding: 1.18rem 1.18rem 1.08rem 1.18rem;
                 min-height: 100%;
             }
 
             .guide-card {
                 padding: 1.2rem 1.25rem 1.15rem 1.25rem;
+            }
+
+            .info-card,
+            .workflow-card,
+            .metric-card,
+            .notice-card,
+            .guide-card,
+            .sample-card {
+                display: flex;
+                flex-direction: column;
+                gap: 0.38rem;
+                height: 100%;
             }
 
             .guide-step,
@@ -2444,7 +2488,7 @@ def render_global_styles() -> None:
             }
 
             .status-chip.ok {
-                background: linear-gradient(180deg, rgba(35, 193, 107, 0.14), rgba(17, 29, 45, 0.96));
+                background: linear-gradient(180deg, rgba(77, 166, 255, 0.16), rgba(17, 29, 45, 0.96));
             }
 
             .status-chip.pending {
@@ -2456,7 +2500,7 @@ def render_global_styles() -> None:
             }
 
             .metric-card.metric-award {
-                background: linear-gradient(180deg, rgba(35, 193, 107, 0.18), rgba(17, 25, 50, 0.96));
+                background: linear-gradient(180deg, rgba(77, 166, 255, 0.20), rgba(17, 25, 50, 0.96));
             }
 
             .metric-card.metric-warning {
@@ -2491,8 +2535,8 @@ def render_global_styles() -> None:
             }
 
             .notice-card.notice-success {
-                background: linear-gradient(180deg, rgba(35, 193, 107, 0.16), rgba(17, 25, 50, 0.96));
-                border-color: rgba(35, 193, 107, 0.20);
+                background: linear-gradient(180deg, rgba(77, 166, 255, 0.17), rgba(17, 25, 50, 0.96));
+                border-color: rgba(77, 166, 255, 0.24);
             }
 
             .notice-card.notice-warning {
@@ -2527,6 +2571,51 @@ def render_global_styles() -> None:
                 color: var(--zoom-text-strong);
             }
 
+            .sample-card {
+                padding: 0;
+                overflow: hidden;
+                gap: 0;
+            }
+
+            .sample-card-body {
+                padding: 1.2rem 1.2rem 1rem 1.2rem;
+                flex: 1;
+                background: linear-gradient(180deg, rgba(17, 25, 50, 0.98), rgba(14, 22, 44, 0.98));
+            }
+
+            .sample-card-file {
+                margin: 0.25rem 0 0 0;
+                color: var(--zoom-text-strong);
+                font-size: 1rem;
+                line-height: 1.32;
+                font-weight: 700;
+                word-break: break-word;
+            }
+
+            .sample-card-copy {
+                margin: 1rem 0 0 0;
+                color: var(--zoom-muted);
+                line-height: 1.68;
+            }
+
+            .sample-card-cta {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 3.55rem;
+                padding: 0.9rem 1rem;
+                border-top: 1px solid rgba(186, 227, 255, 0.14);
+                background: linear-gradient(180deg, #2d8cff 0%, #0b5cff 100%);
+                color: #ffffff !important;
+                font-weight: 800;
+                text-decoration: none;
+                text-align: center;
+            }
+
+            .sample-card-cta:hover {
+                background: linear-gradient(180deg, #4da6ff 0%, #1869ff 100%);
+            }
+
             .stSelectbox [data-baseweb="select"] > div,
             .stMultiSelect [data-baseweb="select"] > div,
             .stTextInput input,
@@ -2536,6 +2625,15 @@ def render_global_styles() -> None:
                 color: var(--zoom-text) !important;
                 border-radius: 14px !important;
                 border: 1px solid var(--zoom-line) !important;
+            }
+
+            .stSelectbox [data-baseweb="select"]:focus-within > div,
+            .stMultiSelect [data-baseweb="select"]:focus-within > div,
+            .stTextInput input:focus,
+            .stNumberInput input:focus,
+            .stTextArea textarea:focus {
+                border-color: rgba(76, 201, 255, 0.34) !important;
+                box-shadow: 0 0 0 4px rgba(45, 140, 255, 0.14) !important;
             }
 
             div[data-baseweb="popover"] > div,
@@ -2556,6 +2654,59 @@ def render_global_styles() -> None:
                 border: 2px dashed rgba(76, 201, 255, 0.22);
                 border-radius: 18px;
                 background: rgba(45, 140, 255, 0.07);
+            }
+
+            .stSlider {
+                padding-top: 0.15rem;
+            }
+
+            .stSlider [data-baseweb="slider"] {
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+            }
+
+            .stSlider [data-baseweb="slider"] > div {
+                background: transparent !important;
+            }
+
+            .stSlider [data-baseweb="slider"] > div > div {
+                background: rgba(118, 142, 209, 0.28) !important;
+            }
+
+            .stSlider [data-baseweb="slider"] > div > div > div {
+                background: linear-gradient(90deg, rgba(76, 201, 255, 0.94), rgba(45, 140, 255, 0.98)) !important;
+            }
+
+            .stSlider [role="slider"] {
+                background: radial-gradient(circle at 35% 35%, #ffffff 0%, #dce9ff 30%, #75c7ff 58%, #2d8cff 100%) !important;
+                border: 2px solid rgba(205, 234, 255, 0.88) !important;
+                box-shadow: 0 0 0 5px rgba(45, 140, 255, 0.22) !important;
+            }
+
+            .stSlider [role="slider"]:focus,
+            .stSlider [role="slider"]:focus-visible {
+                outline: none !important;
+                box-shadow: 0 0 0 6px rgba(76, 201, 255, 0.26) !important;
+            }
+
+            .stSlider div[data-testid="stTickBarMin"],
+            .stSlider div[data-testid="stTickBarMax"],
+            .stSlider div[data-testid*="TickBar"] {
+                background: rgba(77, 166, 255, 0.82) !important;
+            }
+
+            .stSlider [data-testid="stThumbValue"],
+            .stSlider p {
+                color: var(--zoom-muted) !important;
+            }
+
+            .stToggle [data-baseweb="switch"] > div {
+                background: rgba(118, 142, 209, 0.24) !important;
+            }
+
+            .stToggle [data-baseweb="switch"] input:checked + div,
+            .stToggle [data-baseweb="switch"] div[aria-checked="true"] {
+                background: linear-gradient(90deg, #2d8cff, #4cc9ff) !important;
             }
 
             .stDownloadButton > button,
@@ -2622,15 +2773,15 @@ def render_global_styles() -> None:
             }
 
             .app-spacer-xl {
-                height: 3.4rem;
+                height: 4.25rem;
             }
 
             .app-spacer-lg {
-                height: 2.35rem;
+                height: 3rem;
             }
 
             .app-spacer-md {
-                height: 1.4rem;
+                height: 1.85rem;
             }
 
             .stAlert {
@@ -2673,6 +2824,12 @@ def render_spacer(size: str = "lg") -> None:
     if size not in {"md", "lg", "xl"}:
         size = "lg"
     st.markdown(f'<div class="app-spacer-{size}"></div>', unsafe_allow_html=True)
+
+
+def build_data_uri_download_href(data: bytes, mime: str = "application/octet-stream") -> str:
+    """Return a data URI that can be used inside an HTML download link."""
+    encoded = base64.b64encode(data).decode("ascii")
+    return f"data:{mime};base64,{encoded}"
 
 
 def render_metric_card(
@@ -2812,10 +2969,10 @@ def render_sidebar_config() -> AppConfig:
     with st.sidebar:
         st.markdown(
             """
-            <div class="saas-shell" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); box-shadow: none; padding: 1rem 1rem 0.95rem 1rem;">
-                <div class="card-kicker" style="color: rgba(243,247,246,0.70);">Control Tower</div>
-                <h3 style="margin: 0.2rem 0 0.45rem 0; color: #f8fbfa;">Grading policy</h3>
-                <p style="margin: 0; color: rgba(243,247,246,0.76); line-height: 1.6;">
+            <div class="saas-shell sidebar-panel">
+                <div class="card-kicker">Control Tower</div>
+                <h3>Grading policy</h3>
+                <p>
                     Tune participation rules, identity safety thresholds, and weighted scoring before you review decisions.
                 </p>
             </div>
@@ -2937,10 +3094,10 @@ def render_filter_controls(config: AppConfig, meeting_options: Sequence[str]) ->
     with st.sidebar:
         st.markdown(
             """
-            <div class="saas-shell" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); box-shadow: none; padding: 0.95rem 1rem;">
-                <div class="card-kicker" style="color: rgba(243,247,246,0.70);">Review Lens</div>
-                <h3 style="margin: 0.2rem 0 0.45rem 0; color: #f8fbfa;">Decision filters</h3>
-                <p style="margin: 0; color: rgba(243,247,246,0.76); line-height: 1.6;">
+            <div class="saas-shell sidebar-panel">
+                <div class="card-kicker">Review Lens</div>
+                <h3>Decision filters</h3>
+                <p>
                     Narrow the workspace to the exact meeting, student, or review category you want to inspect.
                 </p>
             </div>
@@ -3009,6 +3166,7 @@ def render_instructions() -> None:
             unsafe_allow_html=True,
         )
 
+    render_spacer("xl")
     workflow_cols = st.columns(3)
     workflow_cards = [
         (
@@ -3038,7 +3196,7 @@ def render_instructions() -> None:
             """,
             unsafe_allow_html=True,
         )
-    render_spacer("lg")
+    render_spacer("xl")
     render_first_time_guide()
 
 
@@ -3053,22 +3211,19 @@ def render_sample_downloads() -> None:
     sample_columns = st.columns(len(sample_files))
     for idx, (name, data) in enumerate(sample_files.items()):
         file_type = Path(name).suffix.replace(".", "").upper()
+        download_href = build_data_uri_download_href(data)
         sample_columns[idx].markdown(
             f"""
-            <div class="info-card">
-                <div class="card-kicker" style="color: #4cc9ff;">{html.escape(file_type)}</div>
-                <h3 class="card-title" style="font-size: 1rem;">{html.escape(name)}</h3>
-                <p class="card-copy">Download this sample file and upload it to explore the app end to end.</p>
+            <div class="sample-card">
+                <div class="sample-card-body">
+                    <div class="card-kicker" style="color: #4cc9ff;">{html.escape(file_type)}</div>
+                    <h3 class="sample-card-file">{html.escape(name)}</h3>
+                    <p class="sample-card-copy">Download this sample file and upload it to explore the app end to end.</p>
+                </div>
+                <a class="sample-card-cta" href="{download_href}" download="{html.escape(name, quote=True)}">Download sample</a>
             </div>
             """,
             unsafe_allow_html=True,
-        )
-        sample_columns[idx].download_button(
-            label=f"Download {name}",
-            data=data,
-            file_name=name,
-            mime="application/octet-stream",
-            use_container_width=True,
         )
     render_spacer("xl")
 
@@ -3226,6 +3381,7 @@ def render_upload_area() -> tuple[list[Any], list[Any], Any, Any]:
             unsafe_allow_html=True,
         )
 
+    render_spacer("md")
     upload_cols = st.columns([1.2, 1.0])
     with upload_cols[0]:
         st.markdown(
