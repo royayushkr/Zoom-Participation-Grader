@@ -2141,50 +2141,71 @@ def render_global_styles() -> None:
     st.markdown(
         """
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
             :root {
-                --app-ink: #162326;
-                --app-muted: #5d6967;
-                --app-panel: rgba(255, 251, 245, 0.92);
-                --app-line: rgba(22, 35, 38, 0.10);
-                --app-soft: #eef3ef;
-                --app-soft-strong: #d9ebe5;
-                --app-teal: #0f766e;
-                --app-teal-dark: #0b4f4b;
-                --app-amber: #b45309;
-                --app-amber-soft: #fff4e5;
-                --app-red: #b42318;
-                --app-red-soft: #fff1ef;
-                --app-green-soft: #e8f5ef;
-                --app-shadow: 0 24px 60px rgba(16, 34, 32, 0.10);
+                --zoom-bg: #080d1a;
+                --zoom-bg-deep: #0b1225;
+                --zoom-panel: rgba(17, 25, 50, 0.94);
+                --zoom-panel-2: rgba(23, 33, 66, 0.96);
+                --zoom-panel-3: rgba(33, 47, 89, 0.92);
+                --zoom-line: rgba(118, 142, 209, 0.16);
+                --zoom-line-strong: rgba(118, 142, 209, 0.28);
+                --zoom-text: #f4f7ff;
+                --zoom-text-strong: #ffffff;
+                --zoom-muted: #a4b0d6;
+                --zoom-subtle: #7c89b0;
+                --zoom-primary: #2d8cff;
+                --zoom-primary-strong: #0b5cff;
+                --zoom-cyan: #4cc9ff;
+                --zoom-success: #23c16b;
+                --zoom-success-soft: rgba(35, 193, 107, 0.13);
+                --zoom-warning: #f59e0b;
+                --zoom-warning-soft: rgba(245, 158, 11, 0.14);
+                --zoom-danger: #f45d6c;
+                --zoom-danger-soft: rgba(244, 93, 108, 0.14);
+                --zoom-shadow: 0 24px 60px rgba(1, 6, 20, 0.46);
+            }
+
+            html, body, [class*="css"] {
+                color-scheme: dark;
             }
 
             .stApp {
+                --primary-color: var(--zoom-primary);
+                --background-color: var(--zoom-bg);
+                --secondary-background-color: var(--zoom-panel);
+                --text-color: var(--zoom-text);
                 background:
-                    radial-gradient(circle at top left, rgba(15, 118, 110, 0.10), transparent 28%),
-                    radial-gradient(circle at top right, rgba(180, 83, 9, 0.12), transparent 24%),
-                    linear-gradient(180deg, #fbf7f1 0%, #f4efe8 100%);
-                color: var(--app-ink);
+                    radial-gradient(circle at top left, rgba(45, 140, 255, 0.16), transparent 26%),
+                    radial-gradient(circle at top right, rgba(76, 201, 255, 0.12), transparent 22%),
+                    linear-gradient(180deg, #060b16 0%, #0a1122 44%, #0b1225 100%);
+                color: var(--zoom-text);
             }
 
-            .stApp, .stMarkdown, .stText, p, li, div {
-                font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
+            .main .block-container {
+                max-width: 1280px;
+                padding-top: 2rem;
+                padding-bottom: 5.25rem;
             }
 
-            h1, h2, h3, .hero-title, .section-title {
-                font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", serif;
-                letter-spacing: -0.02em;
+            .stApp, .stMarkdown, .stText, p, li, div, span, label {
+                font-family: "Manrope", "Avenir Next", "Trebuchet MS", sans-serif;
+            }
+
+            h1, h2, h3, h4, .hero-title, .section-title, .card-title {
+                font-family: "Manrope", "Avenir Next", "Trebuchet MS", sans-serif;
+                letter-spacing: -0.03em;
             }
 
             section[data-testid="stSidebar"] {
                 background:
-                    linear-gradient(180deg, rgba(11, 28, 30, 0.98), rgba(15, 38, 40, 0.97));
-                border-right: 1px solid rgba(255, 255, 255, 0.08);
+                    linear-gradient(180deg, rgba(7, 13, 29, 0.98), rgba(11, 18, 37, 0.99));
+                border-right: 1px solid rgba(118, 142, 209, 0.14);
             }
 
             section[data-testid="stSidebar"] * {
-                color: #f3f7f6;
+                color: var(--zoom-text);
             }
 
             section[data-testid="stSidebar"] .stSlider label,
@@ -2192,41 +2213,34 @@ def render_global_styles() -> None:
             section[data-testid="stSidebar"] .stSelectbox label,
             section[data-testid="stSidebar"] .stMultiSelect label,
             section[data-testid="stSidebar"] .stToggle label {
-                color: #f3f7f6;
-                font-weight: 500;
+                color: var(--zoom-text);
+                font-weight: 600;
             }
 
             section[data-testid="stSidebar"] .stExpander {
-                border: 1px solid rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(118, 142, 209, 0.14);
                 border-radius: 20px;
-                background: rgba(255, 255, 255, 0.03);
+                background: rgba(255, 255, 255, 0.02);
                 overflow: hidden;
             }
 
-            section[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"],
-            section[data-testid="stSidebar"] .stTextInput input,
-            section[data-testid="stSidebar"] .stMultiSelect [data-baseweb="select"] {
-                background: rgba(255, 255, 255, 0.07);
-                border-radius: 14px;
-            }
-
             .saas-shell {
-                background: var(--app-panel);
-                border: 1px solid var(--app-line);
-                border-radius: 28px;
-                box-shadow: var(--app-shadow);
-                padding: 1.5rem 1.5rem 1.35rem 1.5rem;
+                background: var(--zoom-panel);
+                border: 1px solid var(--zoom-line);
+                border-radius: 26px;
+                box-shadow: var(--zoom-shadow);
+                padding: 1.2rem 1.2rem 1.05rem 1.2rem;
             }
 
             .hero-shell {
                 background:
-                    linear-gradient(145deg, rgba(17, 82, 79, 0.96), rgba(9, 53, 50, 0.96)),
-                    linear-gradient(180deg, #0f766e, #0b4f4b);
-                border: 1px solid rgba(255, 255, 255, 0.10);
+                    radial-gradient(circle at top right, rgba(76, 201, 255, 0.18), transparent 28%),
+                    linear-gradient(180deg, rgba(16, 24, 48, 0.98), rgba(17, 28, 56, 0.98));
+                border: 1px solid var(--zoom-line-strong);
                 border-radius: 32px;
-                color: #f8fbfa;
+                color: var(--zoom-text-strong);
                 padding: 2rem 2rem 1.8rem 2rem;
-                box-shadow: 0 26px 70px rgba(11, 37, 36, 0.24);
+                box-shadow: var(--zoom-shadow);
                 min-height: 100%;
             }
 
@@ -2237,33 +2251,33 @@ def render_global_styles() -> None:
             .pill {
                 text-transform: uppercase;
                 letter-spacing: 0.14em;
-                font-size: 0.73rem;
-                font-weight: 700;
+                font-size: 0.72rem;
+                font-weight: 800;
             }
 
             .hero-kicker {
-                color: rgba(243, 247, 246, 0.75);
+                color: rgba(244, 247, 255, 0.68);
                 margin-bottom: 0.85rem;
             }
 
             .hero-title {
-                font-size: clamp(2.3rem, 4vw, 4.2rem);
+                font-size: clamp(2.3rem, 4vw, 4rem);
                 line-height: 1.02;
-                margin: 0 0 0.9rem 0;
+                margin: 0 0 0.85rem 0;
             }
 
             .hero-copy {
-                color: rgba(243, 247, 246, 0.86);
-                font-size: 1.05rem;
-                line-height: 1.65;
-                margin-bottom: 1.1rem;
-                max-width: 48rem;
+                color: var(--zoom-muted);
+                font-size: 1.02rem;
+                line-height: 1.72;
+                margin-bottom: 1.15rem;
+                max-width: 46rem;
             }
 
             .pill-row {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 0.55rem;
+                gap: 0.65rem;
                 margin-top: 1rem;
             }
 
@@ -2271,249 +2285,368 @@ def render_global_styles() -> None:
                 display: inline-flex;
                 align-items: center;
                 gap: 0.35rem;
-                padding: 0.55rem 0.85rem;
+                padding: 0.58rem 0.9rem;
                 border-radius: 999px;
-                background: rgba(255, 255, 255, 0.10);
-                color: #f8fbfa;
-                border: 1px solid rgba(255, 255, 255, 0.10);
+                background: rgba(45, 140, 255, 0.10);
+                color: #dce9ff;
+                border: 1px solid rgba(76, 201, 255, 0.16);
+            }
+
+            .hero-panel,
+            .info-card,
+            .workflow-card,
+            .metric-card,
+            .notice-card,
+            .guide-card,
+            .workspace-banner,
+            .status-strip {
+                background: var(--zoom-panel);
+                border: 1px solid var(--zoom-line);
+                border-radius: 24px;
+                box-shadow: var(--zoom-shadow);
             }
 
             .hero-panel {
-                background: rgba(255, 252, 247, 0.92);
-                border: 1px solid rgba(22, 35, 38, 0.08);
-                border-radius: 28px;
-                padding: 1.35rem 1.35rem 1.15rem 1.35rem;
-                box-shadow: var(--app-shadow);
+                padding: 1.25rem 1.25rem 1.1rem 1.25rem;
                 min-height: 100%;
             }
 
             .hero-panel h3,
             .card-title {
-                margin: 0 0 0.6rem 0;
-                color: var(--app-ink);
-                font-size: 1.2rem;
+                margin: 0 0 0.55rem 0;
+                color: var(--zoom-text-strong);
+                font-size: 1.14rem;
+                font-weight: 700;
             }
 
             .hero-panel p,
             .hero-panel li,
             .card-copy,
             .section-copy {
-                color: var(--app-muted);
-                line-height: 1.62;
+                color: var(--zoom-muted);
+                line-height: 1.68;
                 margin: 0;
             }
 
             .hero-list,
-            .sheet-list {
+            .sheet-list,
+            .guide-list {
                 list-style: none;
                 padding: 0;
                 margin: 0.95rem 0 0 0;
             }
 
             .hero-list li,
-            .sheet-list li {
+            .sheet-list li,
+            .guide-list li {
                 display: flex;
+                gap: 0.9rem;
+                align-items: flex-start;
                 justify-content: space-between;
-                gap: 1rem;
-                padding: 0.7rem 0;
-                border-bottom: 1px solid rgba(22, 35, 38, 0.08);
-                color: var(--app-ink);
-                font-size: 0.96rem;
+                padding: 0.78rem 0;
+                border-bottom: 1px solid rgba(118, 142, 209, 0.10);
+                color: var(--zoom-text);
+                font-size: 0.95rem;
             }
 
             .hero-list li:last-child,
-            .sheet-list li:last-child {
+            .sheet-list li:last-child,
+            .guide-list li:last-child {
                 border-bottom: none;
             }
 
             .hero-list span:last-child,
             .sheet-list span:last-child {
-                color: var(--app-muted);
+                color: var(--zoom-muted);
                 text-align: right;
             }
 
             .section-shell {
-                margin: 0.85rem 0 1rem 0;
+                margin: 0.2rem 0 1.5rem 0;
             }
 
             .section-kicker {
-                color: var(--app-teal);
-                margin-bottom: 0.35rem;
+                color: var(--zoom-cyan);
+                margin-bottom: 0.45rem;
             }
 
             .section-title {
-                color: var(--app-ink);
-                font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-                margin: 0 0 0.35rem 0;
+                color: var(--zoom-text-strong);
+                font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+                margin: 0 0 0.4rem 0;
+                font-weight: 800;
             }
 
             .section-copy {
-                max-width: 52rem;
+                max-width: 56rem;
+                color: var(--zoom-muted);
             }
 
             .info-card,
             .workflow-card,
             .metric-card,
             .notice-card {
-                background: var(--app-panel);
-                border: 1px solid var(--app-line);
-                border-radius: 24px;
-                padding: 1.15rem 1.15rem 1.05rem 1.15rem;
-                box-shadow: 0 20px 45px rgba(16, 34, 32, 0.08);
+                padding: 1.18rem 1.18rem 1.08rem 1.18rem;
                 min-height: 100%;
             }
 
+            .guide-card {
+                padding: 1.2rem 1.25rem 1.15rem 1.25rem;
+            }
+
+            .guide-step,
             .workflow-step {
+                width: 1.95rem;
+                height: 1.95rem;
+                min-width: 1.95rem;
+                border-radius: 999px;
+                background: rgba(45, 140, 255, 0.14);
+                color: #dce9ff;
                 display: inline-flex;
-                width: 2rem;
-                height: 2rem;
                 align-items: center;
                 justify-content: center;
-                border-radius: 999px;
-                background: rgba(15, 118, 110, 0.11);
-                color: var(--app-teal-dark);
-                font-weight: 700;
-                margin-bottom: 0.85rem;
+                font-weight: 800;
+                font-size: 0.88rem;
+            }
+
+            .workflow-step {
+                margin-bottom: 0.95rem;
+            }
+
+            .status-strip {
+                padding: 1.15rem 1.15rem 1.05rem 1.15rem;
+            }
+
+            .status-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 0.9rem;
+            }
+
+            .status-chip {
+                border-radius: 18px;
+                padding: 0.95rem 1rem;
+                border: 1px solid rgba(118, 142, 209, 0.12);
+                background: var(--zoom-panel-2);
+            }
+
+            .status-chip strong {
+                display: block;
+                color: var(--zoom-text-strong);
+                margin-bottom: 0.25rem;
+                font-size: 0.97rem;
+            }
+
+            .status-chip span {
+                color: var(--zoom-muted);
+                font-size: 0.9rem;
+                line-height: 1.52;
+            }
+
+            .status-chip.ok {
+                background: linear-gradient(180deg, rgba(35, 193, 107, 0.14), rgba(17, 29, 45, 0.96));
+            }
+
+            .status-chip.pending {
+                background: linear-gradient(180deg, rgba(45, 140, 255, 0.10), rgba(17, 25, 50, 0.96));
             }
 
             .metric-card {
-                padding: 1rem 1rem 0.9rem 1rem;
+                padding: 1.05rem 1.05rem 1rem 1.05rem;
             }
 
             .metric-card.metric-award {
-                background: linear-gradient(180deg, #eef8f4 0%, #e5f5ee 100%);
+                background: linear-gradient(180deg, rgba(35, 193, 107, 0.18), rgba(17, 25, 50, 0.96));
             }
 
             .metric-card.metric-warning {
-                background: linear-gradient(180deg, #fff6ec 0%, #fff1df 100%);
+                background: linear-gradient(180deg, rgba(245, 158, 11, 0.18), rgba(17, 25, 50, 0.96));
             }
 
             .metric-card.metric-review {
-                background: linear-gradient(180deg, #fff3f1 0%, #ffe7e2 100%);
+                background: linear-gradient(180deg, rgba(244, 93, 108, 0.18), rgba(17, 25, 50, 0.96));
             }
 
             .metric-card.metric-neutral {
-                background: linear-gradient(180deg, #fffdfa 0%, #f7f3ec 100%);
+                background: linear-gradient(180deg, rgba(45, 140, 255, 0.12), rgba(17, 25, 50, 0.96));
             }
 
             .metric-label {
-                color: var(--app-muted);
-                margin-bottom: 0.55rem;
+                color: var(--zoom-subtle);
+                margin-bottom: 0.58rem;
             }
 
             .metric-value {
-                color: var(--app-ink);
+                color: var(--zoom-text-strong);
                 font-size: 2rem;
-                font-weight: 700;
+                font-weight: 800;
                 line-height: 1;
             }
 
             .metric-footnote {
-                color: var(--app-muted);
+                color: var(--zoom-muted);
                 font-size: 0.88rem;
-                margin-top: 0.55rem;
+                margin-top: 0.58rem;
+                line-height: 1.5;
             }
 
             .notice-card.notice-success {
-                background: var(--app-green-soft);
-                border-color: rgba(15, 118, 110, 0.15);
+                background: linear-gradient(180deg, rgba(35, 193, 107, 0.16), rgba(17, 25, 50, 0.96));
+                border-color: rgba(35, 193, 107, 0.20);
             }
 
             .notice-card.notice-warning {
-                background: var(--app-amber-soft);
-                border-color: rgba(180, 83, 9, 0.16);
+                background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(17, 25, 50, 0.96));
+                border-color: rgba(245, 158, 11, 0.20);
             }
 
             .notice-card.notice-danger {
-                background: var(--app-red-soft);
-                border-color: rgba(180, 35, 24, 0.16);
+                background: linear-gradient(180deg, rgba(244, 93, 108, 0.16), rgba(17, 25, 50, 0.96));
+                border-color: rgba(244, 93, 108, 0.20);
             }
 
             .notice-title {
                 font-size: 1rem;
                 font-weight: 700;
-                color: var(--app-ink);
-                margin-bottom: 0.3rem;
+                color: var(--zoom-text-strong);
+                margin-bottom: 0.32rem;
             }
 
             .notice-copy {
-                color: var(--app-muted);
+                color: var(--zoom-muted);
                 margin: 0;
-                line-height: 1.55;
+                line-height: 1.56;
             }
 
             .workspace-banner {
-                background: linear-gradient(180deg, rgba(255, 251, 245, 0.96), rgba(248, 244, 237, 0.98));
-                border: 1px solid var(--app-line);
-                border-radius: 26px;
-                padding: 1rem 1.1rem;
-                box-shadow: 0 18px 40px rgba(16, 34, 32, 0.06);
+                background: linear-gradient(180deg, rgba(33, 47, 89, 0.76), rgba(17, 25, 50, 0.96));
+                padding: 1rem 1.05rem;
             }
 
             .workspace-banner strong {
-                color: var(--app-ink);
+                color: var(--zoom-text-strong);
+            }
+
+            .stSelectbox [data-baseweb="select"] > div,
+            .stMultiSelect [data-baseweb="select"] > div,
+            .stTextInput input,
+            .stNumberInput input,
+            .stTextArea textarea {
+                background: var(--zoom-panel-2) !important;
+                color: var(--zoom-text) !important;
+                border-radius: 14px !important;
+                border: 1px solid var(--zoom-line) !important;
+            }
+
+            div[data-baseweb="popover"] > div,
+            ul[role="listbox"] {
+                background: var(--zoom-panel-2) !important;
+                color: var(--zoom-text) !important;
+                border: 1px solid var(--zoom-line) !important;
             }
 
             div[data-testid="stFileUploader"] {
-                background: rgba(255, 252, 247, 0.92);
-                border: 1px solid rgba(22, 35, 38, 0.10);
+                background: var(--zoom-panel);
+                border: 1px solid var(--zoom-line);
                 border-radius: 24px;
-                padding: 0.5rem 0.85rem 0.85rem 0.85rem;
+                padding: 0.55rem 0.9rem 0.95rem 0.9rem;
             }
 
             div[data-testid="stFileUploader"] section {
-                border: 2px dashed rgba(15, 118, 110, 0.20);
+                border: 2px dashed rgba(76, 201, 255, 0.22);
                 border-radius: 18px;
-                background: rgba(15, 118, 110, 0.03);
+                background: rgba(45, 140, 255, 0.07);
             }
 
             .stDownloadButton > button,
-            .stButton > button {
-                border-radius: 16px;
-                border: 1px solid rgba(15, 118, 110, 0.18);
-                background: linear-gradient(180deg, #155d58 0%, #0f4d48 100%);
-                color: #f8fbfa;
-                font-weight: 700;
-                padding: 0.8rem 1rem;
-                box-shadow: 0 16px 35px rgba(15, 77, 72, 0.18);
+            .stButton > button,
+            div[data-testid="stFileUploader"] button,
+            button[data-testid="baseButton-secondary"],
+            button[data-testid="baseButton-primary"] {
+                border-radius: 16px !important;
+                border: 1px solid rgba(76, 201, 255, 0.18) !important;
+                background: linear-gradient(180deg, #2d8cff 0%, #0b5cff 100%) !important;
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                min-height: 2.85rem !important;
+                padding: 0.78rem 1rem !important;
+                box-shadow: 0 14px 34px rgba(11, 92, 255, 0.34) !important;
+                transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
             }
 
             .stDownloadButton > button:hover,
-            .stButton > button:hover {
-                border-color: rgba(15, 118, 110, 0.25);
-                color: #ffffff;
-            }
-
-            [data-testid="stDataFrame"],
-            [data-testid="stDataEditor"] {
-                border: 1px solid rgba(22, 35, 38, 0.10);
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 18px 40px rgba(16, 34, 32, 0.06);
-                background: rgba(255, 252, 247, 0.92);
+            .stButton > button:hover,
+            div[data-testid="stFileUploader"] button:hover,
+            button[data-testid="baseButton-secondary"]:hover,
+            button[data-testid="baseButton-primary"]:hover {
+                border-color: rgba(76, 201, 255, 0.32) !important;
+                box-shadow: 0 18px 36px rgba(11, 92, 255, 0.40) !important;
+                transform: translateY(-1px);
+                color: #ffffff !important;
             }
 
             div[data-baseweb="tab-list"] {
-                gap: 0.35rem;
-                background: rgba(255, 252, 247, 0.75);
-                border: 1px solid rgba(22, 35, 38, 0.08);
-                padding: 0.3rem;
+                gap: 0.45rem;
+                background: rgba(17, 25, 50, 0.88);
+                border: 1px solid var(--zoom-line);
+                padding: 0.38rem;
                 border-radius: 18px;
             }
 
             div[data-baseweb="tab-list"] button {
                 border-radius: 14px;
-                color: var(--app-muted);
-                font-weight: 600;
+                color: var(--zoom-muted) !important;
+                font-weight: 700;
+                background: transparent;
             }
 
             div[data-baseweb="tab-list"] button[aria-selected="true"] {
-                background: rgba(15, 118, 110, 0.10);
-                color: var(--app-teal-dark);
+                background: linear-gradient(180deg, rgba(45, 140, 255, 0.22), rgba(45, 140, 255, 0.12));
+                color: var(--zoom-text-strong) !important;
+                border: 1px solid rgba(76, 201, 255, 0.16);
+            }
+
+            [data-testid="stDataFrame"],
+            [data-testid="stDataEditor"] {
+                border: 1px solid var(--zoom-line);
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 18px 40px rgba(1, 6, 20, 0.28);
+                background: var(--zoom-panel);
+            }
+
+            .stExpander {
+                border: 1px solid var(--zoom-line);
+                border-radius: 22px;
+                background: var(--zoom-panel);
+            }
+
+            .app-spacer-xl {
+                height: 3.4rem;
+            }
+
+            .app-spacer-lg {
+                height: 2.35rem;
+            }
+
+            .app-spacer-md {
+                height: 1.4rem;
             }
 
             .stAlert {
                 border-radius: 20px;
+            }
+
+            @media (max-width: 900px) {
+                .status-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .status-grid {
+                    grid-template-columns: 1fr;
+                }
             }
         </style>
         """,
@@ -2533,6 +2666,13 @@ def render_section_header(kicker: str, title: str, copy: str) -> None:
         """,
         unsafe_allow_html=True,
     )
+
+
+def render_spacer(size: str = "lg") -> None:
+    """Render vertical breathing room between major sections."""
+    if size not in {"md", "lg", "xl"}:
+        size = "lg"
+    st.markdown(f'<div class="app-spacer-{size}"></div>', unsafe_allow_html=True)
 
 
 def render_metric_card(
@@ -2566,6 +2706,105 @@ def render_notice_card(title: str, copy: str, tone: str = "success") -> None:
         """,
         unsafe_allow_html=True,
     )
+
+
+def render_start_here_strip() -> None:
+    """Render a clear first-step strip for instructors."""
+    st.markdown(
+        """
+        <div class="status-strip">
+            <div class="card-kicker" style="color: #4cc9ff; margin-bottom: 0.7rem;">Start here</div>
+            <div class="status-grid">
+                <div class="status-chip ok">
+                    <strong>Required export 1</strong>
+                    <span>Zoom transcript file in <code>.vtt</code> format.</span>
+                </div>
+                <div class="status-chip ok">
+                    <strong>Required export 2</strong>
+                    <span>Zoom participant report in <code>.csv</code> format.</span>
+                </div>
+                <div class="status-chip pending">
+                    <strong>Optional but helpful</strong>
+                    <span>Class roster and alias map for stronger identity matching.</span>
+                </div>
+                <div class="status-chip pending">
+                    <strong>Final output</strong>
+                    <span>One Excel workbook with Award, Do_Not_Award, Manual_Review, and audit sheets.</span>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_first_time_guide() -> None:
+    """Render a concise guide for first-time instructors."""
+    st.markdown(
+        """
+        <div class="guide-card">
+            <div class="card-kicker" style="color: #4cc9ff;">Quick start for first-time users</div>
+            <h3 class="card-title">Follow this sequence once and the workflow becomes straightforward.</h3>
+            <ul class="guide-list">
+                <li><span class="guide-step">1</span><span>Export the <strong>participant report CSV</strong> and <strong>transcript VTT</strong> from Zoom for the same meeting.</span></li>
+                <li><span class="guide-step">2</span><span>Upload those two files first. Add a roster or alias map only if you already have them ready.</span></li>
+                <li><span class="guide-step">3</span><span>Read the validation and matching sections before trusting final decisions, especially for display-name mismatches.</span></li>
+                <li><span class="guide-step">4</span><span>Use the final decision table for overrides, then export the Excel workbook as the grading record.</span></li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_upload_readiness(
+    transcript_count: int,
+    attendance_count: int,
+    has_roster: bool,
+    has_aliases: bool,
+) -> None:
+    """Render a simple readiness panel that tells the user what to do next."""
+    transcript_ready = transcript_count > 0
+    attendance_ready = attendance_count > 0
+    ready_to_grade = transcript_ready and attendance_ready
+    next_step = "Upload both the Zoom transcript VTT and participant CSV to unlock the grading workflow."
+    if transcript_ready and not attendance_ready:
+        next_step = "Upload the Zoom participant CSV next so attendance evidence can be verified."
+    elif attendance_ready and not transcript_ready:
+        next_step = "Upload the Zoom transcript VTT next so speaking evidence can be verified."
+    elif ready_to_grade:
+        next_step = "Core evidence is ready. Continue into validation, matching review, and final decision export."
+
+    st.markdown(
+        f"""
+        <div class="status-strip">
+            <div class="card-kicker" style="color: #4cc9ff; margin-bottom: 0.7rem;">Workspace readiness</div>
+            <p class="section-copy" style="margin-bottom: 1rem; max-width: none;">{html.escape(next_step)}</p>
+            <div class="status-grid">
+                <div class="status-chip {'ok' if transcript_ready else 'pending'}">
+                    <strong>Transcript</strong>
+                    <span>{'Ready: one or more VTT files uploaded.' if transcript_ready else 'Still needed: upload at least one Zoom transcript VTT.'}</span>
+                </div>
+                <div class="status-chip {'ok' if attendance_ready else 'pending'}">
+                    <strong>Attendance</strong>
+                    <span>{'Ready: one or more participant CSV files uploaded.' if attendance_ready else 'Still needed: upload at least one Zoom participant CSV.'}</span>
+                </div>
+                <div class="status-chip {'ok' if has_roster else 'pending'}">
+                    <strong>Roster</strong>
+                    <span>{'Optional boost: roster uploaded for stronger matching.' if has_roster else 'Optional: upload a roster if students use inconsistent display names.'}</span>
+                </div>
+                <div class="status-chip {'ok' if ready_to_grade else 'pending'}">
+                    <strong>Ready to grade</strong>
+                    <span>{'Yes: core evidence is present and the grading workspace can run.' if ready_to_grade else 'Not yet: upload both a transcript and attendance export to unlock full grading output.'}</span>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if has_aliases:
+        st.caption("Alias mapping is loaded, so known nickname and display-name variations can be matched more safely.")
 
 
 def render_sidebar_config() -> AppConfig:
@@ -2729,22 +2968,24 @@ def render_filter_controls(config: AppConfig, meeting_options: Sequence[str]) ->
 
 def render_instructions() -> None:
     """Render the app title and high-level instructions."""
+    render_start_here_strip()
+    render_spacer("lg")
     hero_col, detail_col = st.columns([1.65, 1.0])
     with hero_col:
         st.markdown(
             """
             <div class="hero-shell">
-                <div class="hero-kicker">Evidence-first participation grading</div>
-                <div class="hero-title">Turn raw Zoom exports into audit-ready participation decisions.</div>
+                <div class="hero-kicker">Zoom-style grading workspace</div>
+                <div class="hero-title">Review class participation with evidence, guardrails, and an export-ready audit trail.</div>
                 <p class="hero-copy">
-                    Upload attendance and transcript evidence, route risky identity matches into manual review,
-                    and export a structured Excel workbook that instructors can defend and reuse.
+                    This workspace is built for instructors who need a dependable way to combine attendance records,
+                    transcript speaking evidence, and manual review into one grading workflow.
                 </p>
                 <div class="pill-row">
-                    <span class="pill">Attendance-backed</span>
-                    <span class="pill">Transcript speaking evidence</span>
-                    <span class="pill">Manual review safeguards</span>
-                    <span class="pill">Excel audit trail</span>
+                    <span class="pill">Attendance-backed decisions</span>
+                    <span class="pill">Speaking evidence from transcripts</span>
+                    <span class="pill">Low-confidence review routing</span>
+                    <span class="pill">One-click Excel export</span>
                 </div>
             </div>
             """,
@@ -2754,14 +2995,14 @@ def render_instructions() -> None:
         st.markdown(
             """
             <div class="hero-panel">
-                <div class="card-kicker" style="color: #0f766e;">What the app expects</div>
-                <h3>Instructor upload pack</h3>
-                <p>Bring in the two core Zoom exports and optionally strengthen identity matching with a roster and alias map.</p>
+                <div class="card-kicker" style="color: #4cc9ff;">What you need before you start</div>
+                <h3>Minimal instructor upload pack</h3>
+                <p>Bring the two core Zoom exports first. Everything else is optional support for cleaner matching and review.</p>
                 <ul class="hero-list">
-                    <li><span>Transcript</span><span>.vtt from Zoom</span></li>
-                    <li><span>Attendance</span><span>.csv participant export</span></li>
-                    <li><span>Roster</span><span>Optional .csv or .xlsx</span></li>
-                    <li><span>Aliases</span><span>Optional nickname map</span></li>
+                    <li><span>Transcript</span><span>Zoom <code>.vtt</code> export</span></li>
+                    <li><span>Attendance</span><span>Zoom participant <code>.csv</code></span></li>
+                    <li><span>Roster</span><span>Optional <code>.csv</code> or <code>.xlsx</code></span></li>
+                    <li><span>Aliases</span><span>Optional nickname mapping <code>.csv</code></span></li>
                 </ul>
             </div>
             """,
@@ -2772,18 +3013,18 @@ def render_instructions() -> None:
     workflow_cards = [
         (
             "01",
-            "Upload evidence",
-            "Bring in transcripts, attendance, and optional roster context across one or many meetings.",
+            "Upload the Zoom exports",
+            "Start with the transcript VTT and participant CSV for the meeting you want to grade.",
         ),
         (
             "02",
-            "Review decisions",
-            "Inspect validation warnings, low-confidence matches, and any rows routed into manual review.",
+            "Check the risky cases",
+            "Inspect validation warnings, low-confidence name matches, and rows routed into manual review.",
         ),
         (
             "03",
-            "Export workbook",
-            "Download a polished Excel package with config, raw evidence, decisions, and an audit log.",
+            "Export the workbook",
+            "Download the structured Excel output with raw evidence, final decisions, and the audit log.",
         ),
     ]
     for column, (step, title, copy) in zip(workflow_cols, workflow_cards):
@@ -2797,6 +3038,8 @@ def render_instructions() -> None:
             """,
             unsafe_allow_html=True,
         )
+    render_spacer("lg")
+    render_first_time_guide()
 
 
 def render_sample_downloads() -> None:
@@ -2813,7 +3056,7 @@ def render_sample_downloads() -> None:
         sample_columns[idx].markdown(
             f"""
             <div class="info-card">
-                <div class="card-kicker" style="color: #0f766e;">{html.escape(file_type)}</div>
+                <div class="card-kicker" style="color: #4cc9ff;">{html.escape(file_type)}</div>
                 <h3 class="card-title" style="font-size: 1rem;">{html.escape(name)}</h3>
                 <p class="card-copy">Download this sample file and upload it to explore the app end to end.</p>
             </div>
@@ -2827,6 +3070,7 @@ def render_sample_downloads() -> None:
             mime="application/octet-stream",
             use_container_width=True,
         )
+    render_spacer("xl")
 
 
 def render_empty_workspace_state() -> None:
@@ -2858,13 +3102,37 @@ def render_empty_workspace_state() -> None:
         column.markdown(
             f"""
             <div class="info-card">
-                <div class="card-kicker" style="color: #0f766e;">{html.escape(kicker)}</div>
+                <div class="card-kicker" style="color: #4cc9ff;">{html.escape(kicker)}</div>
                 <h3 class="card-title">{html.escape(title)}</h3>
                 <p class="card-copy">{html.escape(copy)}</p>
             </div>
             """,
             unsafe_allow_html=True,
         )
+
+
+def render_core_upload_notice(
+    has_transcript: bool,
+    has_attendance: bool,
+) -> None:
+    """Explain why full grading sections are hidden until core evidence is ready."""
+    missing_parts: list[str] = []
+    if not has_transcript:
+        missing_parts.append("Zoom transcript VTT")
+    if not has_attendance:
+        missing_parts.append("Zoom participant CSV")
+    missing_text = " and ".join(missing_parts) if missing_parts else "required Zoom files"
+
+    render_section_header(
+        "Next required step",
+        "Complete the core Zoom upload pack to unlock grading decisions",
+        "Raw previews can still be inspected below, but matching review, final decisions, and export stay hidden until both required Zoom evidence files are present.",
+    )
+    render_notice_card(
+        "Core grading workflow is still locked.",
+        f"Upload the missing {missing_text} next. Once both are present, the app will unlock identity matching, final review, and Excel export.",
+        tone="warning",
+    )
 
 
 def render_validation_summary(issues: list[ValidationIssue]) -> None:
@@ -2950,7 +3218,7 @@ def render_upload_area() -> tuple[list[Any], list[Any], Any, Any]:
         column.markdown(
             f"""
             <div class="info-card">
-                <div class="card-kicker" style="color: #0f766e;">{html.escape(kicker)}</div>
+                <div class="card-kicker" style="color: #4cc9ff;">{html.escape(kicker)}</div>
                 <h3 class="card-title" style="font-size: 1.05rem;">{html.escape(title)}</h3>
                 <p class="card-copy">{html.escape(copy)}</p>
             </div>
@@ -3282,7 +3550,7 @@ def render_export_section(
         st.markdown(
             """
             <div class="info-card">
-                <div class="card-kicker" style="color: #0f766e;">Workbook contents</div>
+                <div class="card-kicker" style="color: #4cc9ff;">Workbook contents</div>
                 <h3 class="card-title">Everything needed for audit and grading</h3>
                 <p class="card-copy">The export includes raw evidence, aggregated tables, decision sheets, and a timestamped audit log.</p>
                 <ul class="sheet-list">
@@ -3299,8 +3567,8 @@ def render_export_section(
     with export_cols[1]:
         st.markdown(
             f"""
-            <div class="hero-panel" style="background: linear-gradient(180deg, rgba(255,252,247,0.98), rgba(249,244,236,0.98));">
-                <div class="card-kicker" style="color: #0f766e;">Ready to ship</div>
+            <div class="hero-panel" style="background: linear-gradient(180deg, rgba(33, 47, 89, 0.82), rgba(17, 25, 50, 0.98));">
+                <div class="card-kicker" style="color: #4cc9ff;">Ready to ship</div>
                 <h3>Export the grading workbook</h3>
                 <p>{html.escape(str(len(final_df)))} decision row(s) and {html.escape(str(len(uploaded_filenames)))} uploaded file reference(s) will be bundled into one download.</p>
             </div>
@@ -3333,8 +3601,16 @@ def main() -> None:
     render_instructions()
     render_sample_downloads()
     transcript_uploads, attendance_uploads, roster_upload, alias_upload = render_upload_area()
+    render_spacer("md")
+    render_upload_readiness(
+        transcript_count=len(transcript_uploads or []),
+        attendance_count=len(attendance_uploads or []),
+        has_roster=roster_upload is not None,
+        has_aliases=alias_upload is not None,
+    )
 
     if not transcript_uploads and not attendance_uploads:
+        render_spacer("xl")
         render_empty_workspace_state()
         return
 
@@ -3426,6 +3702,40 @@ def main() -> None:
             tone="warning",
         )
 
+    core_inputs_ready = not raw_transcript_df.empty and not raw_attendance_df.empty
+    if not core_inputs_ready:
+        empty_final = empty_df(
+            FINAL_COLUMNS
+            + [
+                "meeting_key",
+                "weighted_score",
+                "final_category",
+                "has_attendance_record",
+                "has_transcript_record",
+                "spoke_strong",
+                "matched_from_source",
+                "student_merge_key",
+                "row_key",
+                "unmatched",
+                "low_confidence",
+                "manual_review_reason",
+                "identity_confidence_note",
+                "source_file",
+            ]
+        )
+        render_spacer("xl")
+        render_validation_summary(issues)
+        render_spacer("xl")
+        render_metrics(raw_transcript_df, raw_attendance_df, empty_final)
+        render_spacer("xl")
+        render_previews(raw_transcript_df, raw_attendance_df, empty_df(MATCHED_COLUMNS), empty_final)
+        render_spacer("xl")
+        render_core_upload_notice(
+            has_transcript=not raw_transcript_df.empty,
+            has_attendance=not raw_attendance_df.empty,
+        )
+        return
+
     global_candidates, meeting_candidates = build_candidates(roster_df, attendance_agg_df)
     alias_lookup = build_alias_lookup(alias_df)
     attendance_matched_df = match_attendance_records(
@@ -3470,7 +3780,9 @@ def main() -> None:
     )
     config = render_filter_controls(config, meeting_options)
 
+    render_spacer("xl")
     render_validation_summary(issues)
+    render_spacer("xl")
     render_metrics(raw_transcript_df, raw_attendance_df, final_df)
 
     filtered_matched_df = apply_filters(
@@ -3483,8 +3795,11 @@ def main() -> None:
     )
     filtered_final_df = apply_filters(final_df, config)
 
+    render_spacer("xl")
     render_previews(raw_transcript_df, raw_attendance_df, filtered_matched_df, filtered_final_df)
+    render_spacer("xl")
     render_matching_review(filtered_matched_df)
+    render_spacer("xl")
     reviewed_filtered_df = render_final_review_editor(filtered_final_df, config)
 
     if not reviewed_filtered_df.empty:
@@ -3498,6 +3813,7 @@ def main() -> None:
     if alias_upload is not None:
         uploaded_filenames.append(alias_upload.name)
 
+    render_spacer("xl")
     render_export_section(
         config=config,
         raw_transcript_df=raw_transcript_df,
